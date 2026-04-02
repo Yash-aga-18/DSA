@@ -7,7 +7,6 @@ using namespace std;
 // predecessor → just left of key
 // successor → just right of key
 
-
 // method-2   find while traversal (Optimized)  
 
 
