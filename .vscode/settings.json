@@ -99,7 +99,13 @@
     "editor.insertSpaces": true,
     "telemetry.feedback.enabled": false,
     "files.exclude": {
+        "": true,
+        "**/*.docx": true,
+        "**/*.exe": true,
+        "**/*.gitignore": true,
+        "**/*.jpg": true,
         "**/*.pdf": true,
+        "**/*.png": true,
         "*/*.pdf": true
     }
 }
