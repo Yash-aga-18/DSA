@@ -22,14 +22,17 @@ TreeNode* trimBST(TreeNode* root, int low, int high) {
     
     if(root == NULL) return NULL;
 
+    // case 1: value too small → discard left subtree
     if(root->val < low) {
         return trimBST(root->right, low, high);
     }
 
+    // case 2: value too large → discard right subtree
     if(root->val > high) {
         return trimBST(root->left, low, high);
     }
 
+    // case 3: valid node → trim both sides
     root->left  = trimBST(root->left,  low, high);
     root->right = trimBST(root->right, low, high);
 
