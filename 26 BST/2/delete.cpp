@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// leetcode Q->450      Delete a Nde in BST
+// leetcode Q->450      Delete a Node in BST
 
 
 struct Node {
