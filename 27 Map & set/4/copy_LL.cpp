@@ -88,14 +88,12 @@ Node* copyOptimal(Node* head)
 
     while(curr != NULL)
     {
-        Node* front = curr->next->next;
-
         copy->next = curr->next;
         copy = copy->next;
 
-        curr->next = front;
+        curr->next = curr->next->next;
+        curr = curr->next;
 
-        curr = front;
     }
 
     return dummy->next;
