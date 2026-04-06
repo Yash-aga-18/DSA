@@ -12,43 +12,49 @@ public:
     // Constructor
     FindSumPairs(vector<int>& nums1, vector<int>& nums2) {
 
-        arr1 = nums1;
-        arr2 = nums2;
+        arr1 = nums1;                      // copy nums1
+        arr2 = nums2;                      // copy nums2
 
-        // build frequency map of nums2
+        // build frequency map for nums2
         for (int x : arr2) {
-            freq[x]++;
+            freq[x]++;                     // count occurrences of each number
         }
+
     }
 
-    // add val to nums2[index]
+
+    
     void add(int index, int val) {
 
-        int oldVal = arr2[index];
-        freq[oldVal]--;                   // remove old value
+        int oldVal = arr2[index];          // get old value at index
+        freq[oldVal]--;                    // remove old value from frequency map
 
-        arr2[index] += val;
 
-        int newVal = arr2[index];
-        freq[newVal]++;                   // add new value
+        arr2[index] += val;                // update value in nums2
+
+
+        int newVal = arr2[index];          // get new updated value
+        freq[newVal]++;                    // add new value to frequency map
+        
     }
-
-    // count pairs such that arr1[i] + arr2[j] = tot
+    
     int count(int tot) {
 
-        int ans = 0;
+        int ans = 0;                       // store number of valid pairs
 
-        for (int x : arr1) {
+        for (int x : arr1) {               // iterate over nums1
 
-            int need = tot - x;
+            int need = tot - x;            // find required value in nums2
 
-            if (freq.find(need) != freq.end()) {
-                ans += freq[need];
-            }
+
+            // if required value exists in nums2 ; add its frequency (multiple pairs possible)
+            if (freq.find(need) != freq.end()) ans += freq[need];         
+            
         }
 
-        return ans;
+        return ans;                        // return total pairs
     }
+
 };
 
 
