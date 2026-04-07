@@ -19,8 +19,8 @@ void mergeParts(vector<int>& v, int low, int mid, int high) {
     while(left  <= mid)     temp.push_back(v[left++]);
     while(right <= high)    temp.push_back(v[right++]);
 
-    for(int x = low; x <= high; x++) {
-        v[x] = temp[x-low];
+    for(int i = low; i <= high; i++) {
+        v[i] = temp[i-low];
     } 
 
 }
