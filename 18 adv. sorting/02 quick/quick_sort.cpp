@@ -12,7 +12,7 @@ int partition1(vector<int>& arr, int low, int high) {   // taking first elemnt a
         while(arr[i] <= pivot && i < high)   i++;  // Move i until we find a value >  pivot
         while(arr[j] > pivot  && j > low)    j--;  // Move j until we find a value <= pivot
 
-        if(i < j) swap(arr[i], arr[j]);           // Swap misplaced elements
+        if(i < j)       swap(arr[i], arr[j]);           // Swap misplaced elements
 
     }
 
