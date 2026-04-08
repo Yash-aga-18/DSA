@@ -50,12 +50,10 @@ vector<int> frequencySort1(vector<int>& nums) {
 vector<int> frequencySort2(vector<int>& nums) {
 
     unordered_map<int, int> mp;
-
-    // Step 1: frequency count
     for(int x : nums)       mp[x]++;
 
 
-    // Step 2: sort nums directly
+    // sort nums directly using custom comparator
     sort(nums.begin(), nums.end(), [&](int a, int b){
 
         if(mp[a] == mp[b])      return a > b;  // value descending
