@@ -11,8 +11,8 @@ int main()
 // 2--> create a vector of same size by putting all initals to 0   and push_back() one by one based on their index value
 //      and update it to 1 any elemnt whose value is 2 is that duplicate element
 
-// 3--> using some mathematics
-  
+// 3--> using some mathematics 
+
 int arr[8]={5,7,4,6,2,1,3,1};
 
 int sum =0;
@@ -24,7 +24,13 @@ for(int i=0; i<n+1; i++){
 
 int s = n*(n+1)/2;
 
-cout<<sum-s;
+cout<<sum-s<< endl;
+
+// 4--> using some bitwise operations 
+
+int ans;
+for(int x: arr)     ans = ans^x;
+cout<<ans << endl;
   
   
 return 0;

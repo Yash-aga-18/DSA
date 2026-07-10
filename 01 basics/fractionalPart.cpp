@@ -7,7 +7,7 @@ int main()
  // but for negative no. it is calculated as (number-greatest integer)  
  
  // greatest integer is the number lies on left side of the number line 
- // eg:--> greatest integer for 1.7 it is 1          for -1.7 it is -2 
+ // eg:--> greatest integer for 1.7 it is 1            for -1.7 it is -2 
  // eg:--> fractional part for  1.7 it is 0.7          for -1.7 it is ( -1.7-(-2) = 0.3 ) 
 
   float x;
