@@ -4,28 +4,30 @@ using namespace std;
 // leetcode Q->45   Jump Game 2
 
 
-int jump(vector<int>& nums) {
+int jump(vector<int>& arr) {
     
-    int n = nums.size();
-    
+    int n = arr.size();
+
+    if(n == 1)  return 0;
+
     int l = 0;
-    int r = 0; // current range [l, r]
+    int r = 0;
     int jumps = 0;
 
-    while(r < n - 1) {
+    while(r < n - 1){
 
-        int farthest = 0;
+        int farthest = r;
 
-        // explore all indices in current range
-        for(int i = l; i <= r; i++) {
-            farthest = max(farthest, i + nums[i]);
+        for(int i = l; i <= r; i++){
+            farthest = max(farthest, i + arr[i]);
         }
 
-        // move to next range (next jump)
+        // Can't move any further
+        if(farthest == r)   return -1;
+
         l = r + 1;
         r = farthest;
-
-        jumps++; // one jump completed
+        jumps++;
     }
 
     return jumps;

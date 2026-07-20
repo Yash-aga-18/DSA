@@ -3,7 +3,7 @@ using namespace std;
 
 // leetcode Q->2529. Maximum Count of Positive Integer and Negative Integer
 // count no of positive and neg. integers and return whether which is maximum
-// arr is already sorted   and   0 is neithr pos or neg
+// arr is already sorted   and   0 is neither pos or neg
 
 
 int main()
