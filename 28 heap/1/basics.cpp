@@ -3,47 +3,47 @@ using namespace std;
 
 int main()
 {
-    // -------------------------------------------------------------------
-    cout << "Now for Max Heap ----->" << endl;
+   // -------------------------------------------------------------------
+   cout << "Now for Max Heap ----->" << endl;
 
-    priority_queue<int> pq1;   // default = max heap
+   priority_queue<int> pq1;   // default = max heap
 
-    pq1.push(10);
-    pq1.push(4);
-    pq1.push(2);
-    pq1.push(-6);
-    pq1.push(85);
-    pq1.push(-15);
+   pq1.push(10);
+   pq1.push(4);
+   pq1.push(2);
+   pq1.push(-6);
+   pq1.push(85);
+   pq1.push(-15);
 
-    cout << "Top element: " << pq1.top() << endl;  // 85
+   cout << "Top element: " << pq1.top() << endl;  // 85
 
-    pq1.pop();  // removes 85
-    cout << "Top after one pop: " << pq1.top() << endl; // 10
+   pq1.pop();  // removes 85
+   cout << "Top after one pop: " << pq1.top() << endl; // 10
 
 
-    // -------------------------------------------------------------------
-    cout << "\nNow for Min Heap ----->" << endl;
+   // -------------------------------------------------------------------
+   cout << "\nNow for Min Heap ----->" << endl;
 
-    priority_queue<int, vector<int>, greater<int>> pq2; // min heap
+   priority_queue<int, vector<int>, greater<int>> pq2; // min heap
 
-    pq2.push(10);
-    pq2.push(4);
-    pq2.push(2);
-    pq2.push(-6);
-    pq2.push(85);
-    pq2.push(-15);
-    pq2.push(-5);
+   pq2.push(10);
+   pq2.push(4);
+   pq2.push(2);
+   pq2.push(-6);
+   pq2.push(85);
+   pq2.push(-15);
+   pq2.push(-5);
 
-    cout << "Top element: " << pq2.top() << endl; // -15
+   cout << "Top element: " << pq2.top() << endl; // -15
 
-    pq2.pop(); // -15
-    pq2.pop(); // -6
-    pq2.pop(); // -5
-    pq2.pop(); // 2
+   pq2.pop(); // -15
+   pq2.pop(); // -6
+   pq2.pop(); // -5
+   pq2.pop(); // 2
 
-    cout << "Top after pops: " << pq2.top() << endl; // 4
+   cout << "Top after pops: " << pq2.top() << endl; // 4
 
-    return 0;
+   return 0;
 }
 
 /*

@@ -20,56 +20,39 @@ public:
 };
 
 
-// ---------------- HEIGHT ----------------
-int levels(Node* root) {
-    if (root == NULL) return 0;
+vector<vector<int>> zigzagLevelOrder(Node* root) {
 
-    return 1 + max(levels(root->left), levels(root->right));
-}
+    int curr_level = 1;
+    vector<vector<int>>ans;
+    if(root == NULL)    return ans;
 
+    queue<Node* >q;
+    q.push(root);
 
-// ---------------- NTH LEVEL ----------------
-void nthLevel(Node* root, int curr, int level, vector<int>& v) {
+    while(!q.empty()){
+        int size = q.size();
+        vector<int> level;
 
-        if (root == NULL)   return;
+        for(int i=0; i<size; i++){
+            Node* temp = q.front();
+            q.pop();
 
-        if (curr == level) {
-            v.push_back(root->val);
-            return;
+            level.push_back(temp->val);
+
+            if(temp->left)       q.push(temp->left);
+            if(temp->right)      q.push(temp->right);
         }
 
-        if(level%2 == 0){       
-            nthLevel(root->right, curr + 1, level, v);
-            nthLevel(root->left,  curr + 1, level, v);
 
-        }
-        else{
-            nthLevel(root->left,  curr + 1, level, v);
-            nthLevel(root->right, curr + 1, level, v);
+        if(curr_level%2 == 0)   reverse(level.begin(), level.end());
 
-        }
-
-    }
-
-
-// ---------------- LEVEL ORDER ----------------
-vector<vector<int>> levelOrder(Node* root) {
-
-    vector<vector<int>> ans;
-
-    int n = levels(root);   // to get the no. of levels
-
-    for (int i = 1; i <= n; i++) {
-        vector<int> v;
-
-        nthLevel(root, 1, i, v);
-
-        ans.push_back(v);
+        ans.push_back(level);
+        curr_level++;
     }
 
     return ans;
+    
 }
-
 
 // ---------------- MAIN ----------------
 int main()
@@ -97,7 +80,7 @@ int main()
 
     Node* root = a;
 
-    vector<vector<int>> ans = levelOrder(root);
+    vector<vector<int>> ans = zigzagLevelOrder(root);
 
     cout << "ZigZag Level Order Traversal:" << endl;
 

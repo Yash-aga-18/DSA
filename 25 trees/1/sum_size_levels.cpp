@@ -34,7 +34,7 @@ int sum(Node* root){
     if(root == NULL)    return 0;
 
     
-    int left_sum = sum(root->left);
+    int left_sum  = sum(root->left);
     int right_sum = sum(root->right);
 
     return (root->val + left_sum + right_sum);
@@ -47,7 +47,7 @@ int size(Node* root){
     if(root == NULL)    return 0;
 
     
-    int left_sum =  size(root->left);
+    int left_sum  = size(root->left);
     int right_sum = size(root->right);
 
     return (1 + left_sum + right_sum);
@@ -59,7 +59,7 @@ int max_val(Node* root){
 
     if(root == NULL) return INT_MIN;
 
-    int left_max = max_val(root->left);
+    int left_max  = max_val(root->left);
     int right_max = max_val(root->right);
 
     return max(root->val, max(left_max, right_max));
@@ -73,7 +73,7 @@ int level(Node* root){
     if(root == NULL)    return 0;
 
     
-    int left_level =  level(root->left);
+    int left_level  = level(root->left);
     int right_level = level(root->right);
 
     return (1 + max(left_level, right_level));
