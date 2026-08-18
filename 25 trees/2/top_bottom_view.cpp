@@ -15,86 +15,118 @@ public:
     }
 };
 
-// ---------------- QUEUE NODE ----------------
-class QNode {
-public:
-    Node* node;
-    int hd;
+vector<int> topView(Node *root) {
 
-    QNode(Node* n, int h) {
-        node = n;
-        hd = h;
-    }
-};
+    // column -> first node value
+    map<int, int> mp;
 
-// ---------------- FIND RANGE ----------------
-void findRange(Node* root, int hd, int& minHD, int& maxHD) {
-    if (root == NULL) return;
 
-    if (hd < minHD) minHD = hd;
-    if (hd > maxHD) maxHD = hd;
+    // {node, column}
+    queue<pair<Node*, int>> q;
 
-    findRange(root->left, hd - 1, minHD, maxHD);
-    findRange(root->right, hd + 1, minHD, maxHD);
-}
-
-// ---------------- MERGED FUNCTION ----------------
-void topBottomView(Node* root, vector<int>& top, vector<int>& bottom) {
-
-    if (root == NULL) return;
-
-    int minHD = 0, maxHD = 0;
-    findRange(root, 0, minHD, maxHD);
-
-    int width = maxHD - minHD + 1;
-
-    top.assign(width, -1);
-    bottom.assign(width, -1);
-
-    vector<bool> filled(width, false);
-
-    queue<QNode> q;
-    q.push(QNode(root, 0));
+    // Start from root at column 0
+    q.push({root, 0});
 
     while (!q.empty()) {
-        QNode front = q.front();
+
+        auto front = q.front();
         q.pop();
 
-        Node* node = front.node;
-        int hd = front.hd;
+        Node* node = front.first;
 
-        int index = hd - minHD;
+        int col = front.second;
 
-        // TOP VIEW → first occurrence
-        if (!filled[index]) {
-            top[index] = node->val;
-            filled[index] = true;
+        // Store only the first node of every column.
+        // Since BFS visits level by level, the first node
+        // encountered is the topmost node.
+        if (mp.find(col) == mp.end()) {
+            mp[col] = node->val;
         }
 
-        // BOTTOM VIEW → overwrite
-        bottom[index] = node->val;
-
-        if (node->left != NULL) {
-            q.push(QNode(node->left, hd - 1));
+        // Left child
+        if (node->left) {
+            q.push({node->left, col - 1});
         }
 
-        if (node->right != NULL) {
-            q.push(QNode(node->right, hd + 1));
+        // Right child
+        if (node->right) {
+            q.push({node->right, col + 1});
         }
     }
+
+    vector<int> ans;
+
+    // Traverse each column from left to right
+    for (auto column : mp) {
+
+        ans.push_back(column.second);
+    }
+
+    return ans;
 }
+
+
+vector<int> bottomView(Node *root) {
+
+    // column -> latest node value
+    map<int, int> mp;
+
+
+    // {node, column}
+    queue<pair<Node*, int>> q;
+
+    // Start from root at column 0
+    q.push({root, 0});
+
+    while (!q.empty()) {
+
+        auto front = q.front();
+        q.pop();
+
+        Node* node = front.first;
+
+        int col = front.second;
+
+        // Keep updating the node of every column.
+        // Since BFS visits level by level, the last node
+        // encountered is the bottommost node.
+        mp[col] = node->val;
+
+        // Left child
+        if (node->left) {
+            q.push({node->left, col - 1});
+        }
+
+        // Right child
+        if (node->right) {
+            q.push({node->right, col + 1});
+        }
+    }
+
+    vector<int> ans;
+
+    // Traverse each column from left to right
+    for (auto column : mp) {
+
+        ans.push_back(column.second);
+    }
+
+    return ans;
+}
+
 
 int main()
 {
-/*
-            1
-           / \
-          2   3
-         / \   \
-        4   5   7
-             \  /
-              6 8
+    /*
+                1
+               / \
+              2   3
+             / \   \
+            4   5   7
+                 \  /
+                  6 8
     */
+
     Node* a = new Node(1);
     Node* b = new Node(2);
     Node* c = new Node(3);
@@ -104,17 +136,22 @@ int main()
     Node* g = new Node(7);
     Node* h = new Node(8);
 
-    a->left = b;
+    a->left  = b;
     a->right = c;
-    b->left = d;
+
+    b->left  = d;
     b->right = e;
+
     e->right = f;
+
     c->right = g;
-    g->left = h;
 
-    vector<int> top, bottom;
+    g->left  = h;
 
-    topBottomView(a, top, bottom);
+
+    vector<int> top    = topView(a);
+    vector<int> bottom = bottomView(a);
+
 
     cout << "Top View:    ";
     for (int x : top) cout << x << " ";

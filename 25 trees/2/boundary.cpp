@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// GFG------> Tree Boundary Traversal
+
+
 // Print all the nodes at the boundary
 //  Hint:
 //      1) print all the left using preorder
@@ -22,18 +25,19 @@ public:
     }
 };
 
+vector<int> ans;
 
 // ---------------- LEFT BOUNDARY ----------------      except all leaf nodes
 void leftBoundary(Node* root) {
     if (root == NULL) return;
 
     if (root->left != NULL) {
-        cout << root->val << " ";
+        ans.push_back(root->val);
         leftBoundary(root->left);
     }
 
     else if (root->right != NULL) {
-        cout << root->val << " ";
+        ans.push_back(root->val);
         leftBoundary(root->right);
     }
 }
@@ -43,7 +47,7 @@ void bottomBoundary(Node* root) {
     if (root == NULL) return;
 
     if (root->left == NULL && root->right == NULL) {
-        cout << root->val << " ";
+        ans.push_back(root->val);
         return;
     }
 
@@ -57,24 +61,33 @@ void rightBoundary(Node* root) {
 
     if (root->right != NULL) {
         rightBoundary(root->right);
-        cout << root->val << " ";   // 🔥 print AFTER recursion
+        ans.push_back(root->val);   // 🔥 print AFTER recursion
     }
     else if (root->left != NULL) {
         rightBoundary(root->left);
-        cout << root->val << " ";   // 🔥 print AFTER recursion
+        ans.push_back(root->val);   // 🔥 print AFTER recursion
     }
 }
 
 
+vector<int> boundaryTraversal(Node *root) {
+    if (root == NULL)       return {};
+    
+    if (root->left == NULL && root->right == NULL) {    // Handle the single-node tree before traversing 
+        ans.push_back(root->val);
+        return ans;
+    }
 
-void boundaryTraversal(Node* root) {
-    if (root == NULL) return;
 
-    cout << root->val << " ";      // root
+    ans.push_back(root->val);      // root
+
 
     leftBoundary(root->left);      // left boundary
     bottomBoundary(root);          // leaf nodes
     rightBoundary(root->right);    // right boundary
+
+    return ans;
+    
 }
 
 
@@ -113,6 +126,8 @@ int main() {
     Node* root = a;
 
     boundaryTraversal(root);
+
+    for(int ele: ans)   cout<<ele<<" ";
 
     return 0;
 }
